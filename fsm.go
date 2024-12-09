@@ -367,6 +367,9 @@ func (f *FSM) Event(ctx context.Context, event string, args ...interface{}) erro
 				unlocked = true
 			}
 			f.enterStateCallbacks(ctx, e)
+			if e.canceled {
+				return
+			}
 			f.afterEventCallbacks(ctx, e)
 		}
 	}
